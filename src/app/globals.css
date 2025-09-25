@@ -6,8 +6,9 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-figtree);
+  --font-mono: var(--font-jetbrains-mono);
+  --breakpoint-xs: 475px;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -44,7 +45,7 @@
 }
 
 :root {
-  --radius: 0.625rem;
+  --radius: 0;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -123,7 +124,134 @@
 
 @layer utilities {
   .dotted-bg {
-    background-image: radial-gradient(circle, oklch(0.556 0 0 / 0.1) 1px, transparent 1px);
+    background-image: radial-gradient(
+      circle,
+      oklch(0.556 0 0 / 0.1) 1px,
+      transparent 1px
+    );
     background-size: 20px 20px;
+  }
+  
+  .font-display {
+    font-family: var(--font-mono);
+    font-weight: 900;
+    letter-spacing: -0.025em;
+  }
+  
+  /* Mobile-first responsive utilities */
+  @media (max-width: 374px) {
+    .mobile-compact {
+      padding: 0.75rem;
+    }
+  }
+  
+  /* Touch-friendly interactions */
+  .touch-manipulation {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* World-class animations */
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slide-in-from-bottom-4 {
+    from {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes slide-in-from-bottom-6 {
+    from {
+      opacity: 0;
+      transform: translateY(1.5rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-in {
+    animation-fill-mode: both;
+  }
+  
+  .fade-in {
+    animation-name: fade-in;
+  }
+  
+  .slide-in-from-bottom-4 {
+    animation-name: slide-in-from-bottom-4;
+  }
+  
+  .slide-in-from-bottom-6 {
+    animation-name: slide-in-from-bottom-6;
+  }
+  
+  .duration-700 {
+    animation-duration: 700ms;
+  }
+  
+  .fill-mode-forwards {
+    animation-fill-mode: forwards;
+  }
+  
+  /* Enhanced backdrop blur for premium feel */
+  .backdrop-blur-sm {
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+  
+  .corner-decoration::before,
+  .corner-decoration::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: hsl(var(--border));
+  }
+  
+  .corner-decoration::before {
+    top: 0;
+    left: 0;
+  }
+  
+  .corner-decoration::after {
+    top: 0;
+    right: 0;
+  }
+  
+  .corner-decoration {
+    position: relative;
+  }
+  
+  .corner-decoration .corner-bottom::before,
+  .corner-decoration .corner-bottom::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: hsl(var(--border));
+  }
+  
+  .corner-decoration .corner-bottom::before {
+    bottom: 0;
+    left: 0;
+  }
+  
+  .corner-decoration .corner-bottom::after {
+    bottom: 0;
+    right: 0;
   }
 }
