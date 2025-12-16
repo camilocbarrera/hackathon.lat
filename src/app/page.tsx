@@ -31,12 +31,12 @@ export default function Home() {
       title: "Peru AI Hackathon",
       url: "https://peru.ai-hackathon.co",
       description: "Peru's flagship AI innovation challenge shaping the region's tech landscape",
-      status: "In Progress",
-      statusColor: "bg-blue-500/10 text-blue-400 border-blue-500/20",
+      status: "Completed",
+      statusColor: "bg-slate-500/10 text-slate-400 border-slate-500/20",
       favicon: "https://peru.ai-hackathon.co/favicon.ico",
       repository: "https://github.com/crafter-station/peru.ai-hackathon.co",
-      lastUpdate: "2 days ago",
-      participants: +200
+      lastUpdate: "1 week ago",
+      participants: +1000
     }
   ];
 
@@ -112,6 +112,47 @@ export default function Home() {
                 />
               </div>
             ))}
+
+            {/* Coming Soon Placeholder */}
+            <div className="opacity-0 animate-in fade-in slide-in-from-bottom-6 duration-700 fill-mode-forwards xl:col-start-2">
+              <li className="material-small relative flex flex-col p-6 leading-5 border-2 border-dashed border-border/50 hover:border-primary/40 bg-card/30 backdrop-blur-sm transition-all duration-300 group cursor-pointer h-full">
+                <a
+                  href="https://cal.com/tomas-calle-espinal-wy0huj/30min"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute inset-0 z-0"
+                  aria-label="Host the next hackathon"
+                />
+                
+                <div className="flex flex-col items-center justify-center flex-1 gap-4 text-center">
+                  <div className="w-10 h-10 rounded-lg border-2 border-dashed border-muted-foreground/30 flex items-center justify-center group-hover:border-primary/50 transition-colors duration-300">
+                    <svg 
+                      className="w-5 h-5 text-muted-foreground/50 group-hover:text-primary/70 transition-colors duration-300" 
+                      fill="none" 
+                      viewBox="0 0 24 24" 
+                      stroke="currentColor"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4v16m8-8H4" />
+                    </svg>
+                  </div>
+                  
+                  <div className="space-y-1.5">
+                    <h3 className="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors duration-300">
+                      Your Country Next?
+                    </h3>
+                    <p className="text-xs text-muted-foreground/70 leading-relaxed">
+                      Partner with us to bring the next<br />hackathon to your region
+                    </p>
+                  </div>
+
+                  <span className="text-xs px-3 py-1 border border-dashed border-primary/30 text-primary/70 font-medium tracking-wide group-hover:border-primary/60 group-hover:text-primary transition-all duration-300">
+                    Let's Talk
+                  </span>
+                </div>
+
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+              </li>
+            </div>
           </ul>
         </div>
 

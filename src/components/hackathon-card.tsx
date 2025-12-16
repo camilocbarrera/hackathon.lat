@@ -26,7 +26,7 @@ export default function HackathonCard({
 
 
   return (
-    <li className="material-small relative flex flex-col gap-3 p-6 leading-5 hover:border-border border border-border/50 bg-card/50 backdrop-blur-sm transition-all duration-300 group">
+    <li className="material-small relative flex flex-col gap-3 p-6 leading-5 hover:border-border border border-border/50 bg-card/50 backdrop-blur-sm transition-all duration-300 group h-full">
       {/* Main link overlay */}
       <a
         href={url}
