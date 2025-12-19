@@ -94,8 +94,6 @@ export default function RootLayout({
       <body
         className={`${figtree.variable} ${jetbrainsMono.variable} antialiased font-sans`}
       >
-        {/* Top fade */}
-        <div className="pointer-events-none fixed inset-x-0 top-0 z-40 h-16 sm:h-24 bg-gradient-to-b from-black to-transparent" />
         {/* Bottom fade */}
         <div className="pointer-events-none fixed inset-x-0 bottom-0 z-40 h-16 sm:h-24 bg-gradient-to-t from-black to-transparent" />
         <ScrollBadge />
