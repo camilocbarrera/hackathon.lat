@@ -117,8 +117,14 @@
   * {
     @apply border-border outline-ring/50;
   }
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
   body {
     @apply bg-background text-foreground;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
@@ -138,17 +144,23 @@
     letter-spacing: -0.025em;
   }
   
-  /* Mobile-first responsive utilities */
-  @media (max-width: 374px) {
-    .mobile-compact {
-      padding: 0.75rem;
-    }
+  /* Safe area insets for notched devices */
+  .safe-area-inset {
+    padding-left: max(env(safe-area-inset-left), 1rem);
+    padding-right: max(env(safe-area-inset-right), 1rem);
+    padding-bottom: env(safe-area-inset-bottom);
   }
   
   /* Touch-friendly interactions */
   .touch-manipulation {
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Prevent text selection on UI elements */
+  .select-none {
+    -webkit-user-select: none;
+    user-select: none;
   }
   
   /* World-class animations */
