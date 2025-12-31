@@ -2,6 +2,8 @@
 
 import DottedBackground from "@/components/dotted-background";
 import HackathonCard from "@/components/hackathon-card";
+import { GithubBadge } from "@/components/github-badge";
+import { StaticGrain } from "@/components/wrapped/grain-overlay";
 
 export default function Home() {
   const hackathons = [
@@ -42,6 +44,8 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background relative">
+      <StaticGrain />
+      <GithubBadge />
       <DottedBackground />
       
       {/* Main container */}
@@ -67,7 +71,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="opacity-0 animate-in fade-in slide-in-from-bottom-4 duration-700 fill-mode-forwards px-4 sm:px-0">
+          <div className="opacity-0 animate-in fade-in slide-in-from-bottom-4 duration-700 fill-mode-forwards px-4 sm:px-0 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
             <a
               href="https://cal.com/tomas-calle-espinal-wy0huj/30min"
               target="_blank"
@@ -76,6 +80,15 @@ export default function Home() {
             >
               <span className="relative z-10 tracking-wide">Schedule Consultation</span>
               <div className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/5 to-primary/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-out"></div>
+            </a>
+            <a
+              href="/2025"
+              className="group relative inline-flex items-center justify-center w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 text-sm font-medium text-foreground bg-transparent hover:bg-muted/50 active:bg-muted/70 transition-all duration-300 ease-out rounded-none focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-background min-h-[48px] sm:min-h-[52px] border border-border hover:border-primary/40 touch-manipulation overflow-hidden gap-2"
+            >
+              <span className="relative z-10 tracking-wide">2025 Wrapped</span>
+              <svg className="w-4 h-4 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
             </a>
           </div>
         </div>

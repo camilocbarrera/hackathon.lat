@@ -19,12 +19,13 @@ import {
 } from "@/components/wrapped/slides";
 import { DesktopWrapped } from "@/components/wrapped/desktop-wrapped";
 import { StaticGrain } from "@/components/wrapped/grain-overlay";
+import { GithubBadge } from "@/components/github-badge";
 import { wrappedData } from "@/data/wrapped-2025";
 
 export default function Wrapped2025Page() {
   return (
     <main className="min-h-screen thc-bg">
-      {/* Grain texture overlay */}
+      <GithubBadge />
       <StaticGrain />
       {/* Mobile: Stories-style carousel */}
       <div className="md:hidden">
