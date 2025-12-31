@@ -94,19 +94,19 @@ export function EditorialFrame({
   const hasContent = Boolean(children);
   
   return (
-    <div className={cn("relative flex items-center gap-4", className)}>
+    <div className={cn("relative flex items-center gap-2 sm:gap-4", className)}>
       {/* Left label with decorative dash */}
       {leftText && (
-        <div className="flex items-center gap-3 shrink-0">
-          <span className="w-6 h-px bg-gradient-to-r from-transparent to-white/30" />
-          <span className="editorial-text text-[10px] tracking-[0.2em] text-white/50 uppercase">
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+          <span className="w-4 sm:w-6 h-px bg-gradient-to-r from-transparent to-white/30" />
+          <span className="editorial-text text-[10px] tracking-[0.2em] text-white/50 uppercase whitespace-nowrap">
             {leftText}
           </span>
         </div>
       )}
       
       {/* Center frame with refined pill shape */}
-      <div className="relative flex-1 min-h-[40px]">
+      <div className="relative flex-1 min-h-[40px] shrink-0">
         {/* Outer glow for accent variant */}
         {variant === "accent" && (
           <div className="absolute inset-0 rounded-full bg-white/5 blur-sm" />
@@ -138,11 +138,11 @@ export function EditorialFrame({
       
       {/* Right label with decorative dash */}
       {rightText && (
-        <div className="flex items-center gap-3 shrink-0">
-          <span className="editorial-text text-[10px] tracking-[0.2em] text-white/50 uppercase">
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+          <span className="editorial-text text-[10px] tracking-[0.2em] text-white/50 uppercase whitespace-nowrap">
             {rightText}
           </span>
-          <span className="w-6 h-px bg-gradient-to-l from-transparent to-white/30" />
+          <span className="w-4 sm:w-6 h-px bg-gradient-to-l from-transparent to-white/30" />
         </div>
       )}
     </div>

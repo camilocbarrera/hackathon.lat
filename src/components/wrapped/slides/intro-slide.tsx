@@ -42,7 +42,7 @@ export function IntroSlide({ year }: IntroSlideProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.6 }}
-          className="w-full max-w-md mt-8"
+          className="w-full max-w-md mt-8 flex justify-center"
         >
           <EditorialFrame leftText="THE YEAR" rightText="IN REVIEW">
             <span className="editorial-text text-sm text-white/80 px-8">

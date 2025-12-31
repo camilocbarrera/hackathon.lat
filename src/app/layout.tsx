@@ -53,6 +53,14 @@ export const metadata: Metadata = {
     description:
       "Empowering entrepreneurs and developers to build groundbreaking products through strategic hackathons, innovation workshops, and collaborative development.",
     siteName: "The Hackathon Company",
+    images: [
+      {
+        url: "/og?title=The%20Hackathon%20Company&description=Building%20the%20future%20through%20innovation",
+        width: 1200,
+        height: 630,
+        alt: "The Hackathon Company",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -60,6 +68,7 @@ export const metadata: Metadata = {
     description:
       "Empowering entrepreneurs and developers to build groundbreaking products through strategic hackathons, innovation workshops, and collaborative development.",
     creator: "@hackathonlat",
+    images: ["/og?title=The%20Hackathon%20Company&description=Building%20the%20future%20through%20innovation"],
   },
   robots: {
     index: true,
