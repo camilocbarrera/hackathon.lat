@@ -10,7 +10,7 @@ export function GithubBadge() {
     const fetchStars = async () => {
       try {
         const response = await fetch(
-          "https://api.github.com/repos/crafter-station/wrapped-2025"
+          "https://api.github.com/repos/camilocbarrera/hackathon.lat"
         );
         if (response.ok) {
           const data = await response.json();
@@ -25,7 +25,7 @@ export function GithubBadge() {
 
   return (
     <motion.a
-      href="https://github.com/crafter-station/wrapped-2025"
+      href="https://github.com/camilocbarrera/hackathon.lat"
       target="_blank"
       rel="noopener noreferrer"
       className="fixed right-4 top-12 z-50 flex items-center gap-2 rounded-full border border-border/50 bg-background/80 px-3 py-1.5 text-muted-foreground backdrop-blur-sm transition-colors hover:border-border hover:text-foreground md:top-4"
