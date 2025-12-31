@@ -32,7 +32,7 @@ export default function HackathonCard({
         href={url}
         target="_blank"
         rel="noopener noreferrer"
-        className="absolute inset-0 z-0"
+        className="absolute inset-0 z-10"
         aria-label={`Visit ${title}`}
       />
 

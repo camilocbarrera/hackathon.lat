@@ -139,7 +139,7 @@ export default function Home() {
                   href="https://cal.com/tomas-calle-espinal-wy0huj/30min"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="absolute inset-0 z-0"
+                  className="absolute inset-0 z-10"
                   aria-label="Host the next hackathon"
                 />
                 

@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import type { WrappedData } from "@/data/wrapped-2025";
 import { AnimatedCounter } from "./animated-counter";
 import { Crosshair, EditorialFrame, HorizontalLine, VerticalLine, BrandLogo } from "./geometric-frame";
@@ -17,11 +18,115 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   );
 }
 
+function useKeyboardNavigation(sectionCount: number) {
+  const [currentSection, setCurrentSection] = useState(0);
+  const [showHint, setShowHint] = useState(true);
+  const isScrolling = useRef(false);
+
+  useEffect(() => {
+    const sections = document.querySelectorAll("[data-section]");
+    
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+            const index = Number(entry.target.getAttribute("data-section"));
+            setCurrentSection(index);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (isScrolling.current) return;
+      
+      const sections = document.querySelectorAll("[data-section]");
+      let targetSection = currentSection;
+
+      if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+        e.preventDefault();
+        targetSection = Math.min(currentSection + 1, sectionCount - 1);
+        setShowHint(false);
+      } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+        e.preventDefault();
+        targetSection = Math.max(currentSection - 1, 0);
+        setShowHint(false);
+      }
+
+      if (targetSection !== currentSection && sections[targetSection]) {
+        isScrolling.current = true;
+        sections[targetSection].scrollIntoView({ behavior: "smooth" });
+        setTimeout(() => { isScrolling.current = false; }, 800);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [currentSection, sectionCount]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowHint(false), 5000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  return { currentSection, showHint };
+}
+
+function KeyboardHint({ show, current, total }: { show: boolean; current: number; total: number }) {
+  return (
+    <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 pointer-events-none">
+      <AnimatePresence>
+        {show && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            className="flex items-center gap-3 px-4 py-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full"
+          >
+            <div className="flex items-center gap-1.5">
+              <kbd className="px-1.5 py-0.5 text-[10px] bg-white/10 rounded text-white/50 font-mono">←</kbd>
+              <kbd className="px-1.5 py-0.5 text-[10px] bg-white/10 rounded text-white/50 font-mono">→</kbd>
+            </div>
+            <span className="text-[10px] text-white/30 tracking-wider">navigate</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      
+      {/* Section indicator dots */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1 }}
+        className="flex items-center justify-center gap-1.5 mt-3"
+      >
+        {Array.from({ length: total }).map((_, i) => (
+          <div
+            key={i}
+            className={`w-1 h-1 rounded-full transition-all duration-300 ${
+              i === current ? "bg-white/60 w-3" : "bg-white/20"
+            }`}
+          />
+        ))}
+      </motion.div>
+    </div>
+  );
+}
+
 export function DesktopWrapped({ data }: DesktopWrappedProps) {
+  const sectionCount = 8;
+  const { currentSection, showHint } = useKeyboardNavigation(sectionCount);
+
   return (
     <div className="min-h-screen thc-bg text-white">
+      <KeyboardHint show={showHint} current={currentSection} total={sectionCount} />
       {/* Hero Section */}
-      <section className="min-h-screen flex flex-col items-center justify-center relative px-8">
+      <section data-section="0" className="min-h-screen flex flex-col items-center justify-center relative px-8">
         <Crosshair />
         
         <motion.div
@@ -78,7 +183,7 @@ export function DesktopWrapped({ data }: DesktopWrappedProps) {
       </section>
 
       {/* Impact Section */}
-      <section className="min-h-screen flex items-center py-32 px-8 lg:px-16 relative">
+      <section data-section="1" className="min-h-screen flex items-center py-32 px-8 lg:px-16 relative">
         <Crosshair />
         <div className="max-w-6xl mx-auto w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -126,7 +231,7 @@ export function DesktopWrapped({ data }: DesktopWrappedProps) {
       </section>
 
       {/* Credits Section */}
-      <section className="min-h-screen flex items-center py-32 px-8 lg:px-16 relative">
+      <section data-section="2" className="min-h-screen flex items-center py-32 px-8 lg:px-16 relative">
         <Crosshair />
         <div className="max-w-6xl mx-auto w-full text-center">
           <motion.div
@@ -186,7 +291,7 @@ export function DesktopWrapped({ data }: DesktopWrappedProps) {
       </section>
 
       {/* Events Section */}
-      <section className="min-h-screen flex items-center py-32 px-8 lg:px-16 relative">
+      <section data-section="3" className="min-h-screen flex items-center py-32 px-8 lg:px-16 relative">
         <Crosshair />
         <div className="max-w-6xl mx-auto w-full">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 items-start">
@@ -237,7 +342,7 @@ export function DesktopWrapped({ data }: DesktopWrappedProps) {
       </section>
 
       {/* Community Section */}
-      <section className="min-h-screen flex items-center py-32 px-8 lg:px-16 relative">
+      <section data-section="4" className="min-h-screen flex items-center py-32 px-8 lg:px-16 relative">
         <Crosshair />
         <div className="max-w-6xl mx-auto w-full">
           <div className="text-center mb-16">
@@ -292,7 +397,7 @@ export function DesktopWrapped({ data }: DesktopWrappedProps) {
       </section>
 
       {/* Sponsors Section */}
-      <section className="min-h-screen flex items-center py-32 px-8 lg:px-16 relative">
+      <section data-section="5" className="min-h-screen flex items-center py-32 px-8 lg:px-16 relative">
         <Crosshair />
         <div className="max-w-6xl mx-auto w-full text-center">
           <motion.div
@@ -350,7 +455,7 @@ export function DesktopWrapped({ data }: DesktopWrappedProps) {
       </section>
 
       {/* Reach Section */}
-      <section className="min-h-screen flex items-center py-32 px-8 lg:px-16 relative">
+      <section data-section="6" className="min-h-screen flex items-center py-32 px-8 lg:px-16 relative">
         <Crosshair />
         <div className="max-w-6xl mx-auto w-full text-center">
           <motion.div
@@ -398,7 +503,7 @@ export function DesktopWrapped({ data }: DesktopWrappedProps) {
       </section>
 
       {/* Closing Section */}
-      <section className="min-h-screen flex items-center py-32 px-8 lg:px-16 relative">
+      <section data-section="7" className="min-h-screen flex items-center py-32 px-8 lg:px-16 relative">
         <Crosshair />
         <div className="max-w-4xl mx-auto w-full text-center">
           <motion.div

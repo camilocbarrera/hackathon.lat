@@ -1,6 +1,6 @@
 export default function DottedBackground() {
   return (
-    <div className="fixed inset-0 z-0">
+    <div className="pointer-events-none fixed inset-0 z-0" aria-hidden="true">
       <div className="dotted-bg w-full h-full opacity-60" />
       {/* Additional subtle pattern overlay */}
       <div 
