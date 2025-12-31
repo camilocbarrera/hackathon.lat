@@ -253,7 +253,7 @@ export const SliderNavigation: FC<{ className?: string }> = ({ className }) => {
   const { goToNext, goToPrev } = useProgressSliderContext();
 
   return (
-    <div className={cn("absolute inset-0 flex", className)}>
+    <div className={cn("absolute inset-x-0 top-0 bottom-[30%] flex", className)}>
       <button
         type="button"
         onClick={goToPrev}
