@@ -3,7 +3,6 @@
 import DottedBackground from "@/components/dotted-background";
 import HackathonCard from "@/components/hackathon-card";
 import { GithubBadge } from "@/components/github-badge";
-import { StaticGrain } from "@/components/wrapped/grain-overlay";
 
 export default function Home() {
   const hackathons = [
@@ -44,7 +43,14 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background relative">
-      <StaticGrain />
+      <div
+        className="pointer-events-none fixed inset-0 z-50 opacity-[0.15]"
+        style={{
+          backgroundImage: "url('/Noise.png')",
+          backgroundRepeat: "repeat",
+        }}
+        aria-hidden="true"
+      />
       <GithubBadge />
       <DottedBackground />
       
