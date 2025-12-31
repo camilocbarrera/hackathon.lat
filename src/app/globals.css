@@ -143,6 +143,105 @@
     font-weight: 900;
     letter-spacing: -0.025em;
   }
+
+  /* THC Brand - Grain texture overlay */
+  .grain-overlay {
+    position: relative;
+  }
+  
+  .grain-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.08;
+    pointer-events: none;
+    z-index: 100;
+    mix-blend-mode: overlay;
+  }
+
+  /* THC Brand - Deep black background */
+  .thc-bg {
+    background-color: #0a0a0a;
+  }
+
+  /* THC Brand - Halftone effect for images */
+  .halftone {
+    filter: contrast(1.2) grayscale(1);
+    mix-blend-mode: luminosity;
+  }
+
+  .halftone-container {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .halftone-container::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, #fff 1px, transparent 1px);
+    background-size: 4px 4px;
+    mix-blend-mode: multiply;
+    opacity: 0.3;
+  }
+
+  /* THC Brand - Geometric frame (rounded rectangle) */
+  .geometric-frame {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 9999px;
+  }
+
+  /* THC Brand - Crosshair lines */
+  .crosshair-h {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .crosshair-v {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  /* THC Brand - Editorial typography */
+  .editorial-text {
+    font-family: var(--font-mono);
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  /* THC Brand - Large display numbers */
+  .display-number {
+    font-family: var(--font-sans);
+    font-weight: 200;
+    letter-spacing: -0.05em;
+    line-height: 0.85;
+  }
+
+  /* THC Brand - Grain animation */
+  @keyframes grain {
+    0%, 100% { transform: translate(0, 0); }
+    10% { transform: translate(-5%, -10%); }
+    20% { transform: translate(-15%, 5%); }
+    30% { transform: translate(7%, -25%); }
+    40% { transform: translate(-5%, 25%); }
+    50% { transform: translate(-15%, 10%); }
+    60% { transform: translate(15%, 0%); }
+    70% { transform: translate(0%, 15%); }
+    80% { transform: translate(3%, 35%); }
+    90% { transform: translate(-10%, 10%); }
+  }
+
+  .animate-grain {
+    animation: grain 8s steps(10) infinite;
+  }
   
   /* Safe area insets for notched devices */
   .safe-area-inset {
