@@ -3,30 +3,11 @@ import { NextRequest } from "next/server";
 
 export const runtime = "edge";
 
-function arrayBufferToBase64(buffer: ArrayBuffer): string {
-  const bytes = new Uint8Array(buffer);
-  let binary = "";
-  for (let i = 0; i < bytes.byteLength; i++) {
-    binary += String.fromCharCode(bytes[i]);
-  }
-  return btoa(binary);
-}
-
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const title = searchParams.get("title") || "The Hackathon Company";
     const description = searchParams.get("description") || "Building the future through innovation";
-
-    const baseUrl = request.nextUrl.origin;
-
-    const brandLogoSvg = await fetch(`${baseUrl}/TCH-BRAND.svg`).then((res) => res.text());
-    const brandLogoBase64 = btoa(brandLogoSvg);
-    const brandLogoDataUrl = `data:image/svg+xml;base64,${brandLogoBase64}`;
-
-    const noiseImage = await fetch(`${baseUrl}/Noise.png`).then((res) => res.arrayBuffer());
-    const noiseBase64 = arrayBufferToBase64(noiseImage);
-    const noiseDataUrl = `data:image/png;base64,${noiseBase64}`;
 
     return new ImageResponse(
       (
@@ -38,11 +19,11 @@ export async function GET(request: NextRequest) {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            background: "#000000",
+            background: "linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%)",
             position: "relative",
           }}
         >
-          {/* Noise texture overlay */}
+          {/* Subtle grid pattern using CSS */}
           <div
             style={{
               position: "absolute",
@@ -50,9 +31,8 @@ export async function GET(request: NextRequest) {
               left: 0,
               right: 0,
               bottom: 0,
-              backgroundImage: `url(${noiseDataUrl})`,
-              backgroundRepeat: "repeat",
-              opacity: 0.4,
+              backgroundImage: "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0)",
+              backgroundSize: "40px 40px",
             }}
           />
 
@@ -63,9 +43,8 @@ export async function GET(request: NextRequest) {
               top: 0,
               left: "50%",
               width: "1px",
-              height: "50%",
+              height: "40%",
               background: "linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 100%)",
-              transform: "translateX(-50%)",
             }}
           />
           <div
@@ -74,9 +53,8 @@ export async function GET(request: NextRequest) {
               bottom: 0,
               left: "50%",
               width: "1px",
-              height: "50%",
+              height: "40%",
               background: "linear-gradient(to top, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 100%)",
-              transform: "translateX(-50%)",
             }}
           />
           <div
@@ -84,10 +62,9 @@ export async function GET(request: NextRequest) {
               position: "absolute",
               left: 0,
               top: "50%",
-              width: "50%",
+              width: "40%",
               height: "1px",
               background: "linear-gradient(to right, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 100%)",
-              transform: "translateY(-50%)",
             }}
           />
           <div
@@ -95,10 +72,9 @@ export async function GET(request: NextRequest) {
               position: "absolute",
               right: 0,
               top: "50%",
-              width: "50%",
+              width: "40%",
               height: "1px",
               background: "linear-gradient(to left, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 100%)",
-              transform: "translateY(-50%)",
             }}
           />
 
@@ -109,22 +85,25 @@ export async function GET(request: NextRequest) {
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              gap: "48px",
-              padding: "80px",
+              gap: "32px",
+              padding: "60px",
               position: "relative",
               zIndex: 1,
             }}
           >
-            {/* Brand Logo */}
-            <img
-              src={brandLogoDataUrl}
-              alt="The Hackathon Company"
-              width={300}
-              height={22}
+            {/* Brand text instead of SVG */}
+            <div
               style={{
-                opacity: 0.6,
+                display: "flex",
+                fontSize: "24px",
+                fontWeight: 300,
+                color: "rgba(255,255,255,0.5)",
+                letterSpacing: "0.2em",
+                textTransform: "uppercase",
               }}
-            />
+            >
+              The Hackathon Company
+            </div>
 
             {/* Title */}
             <div
@@ -132,36 +111,55 @@ export async function GET(request: NextRequest) {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                gap: "24px",
-                textAlign: "center",
+                gap: "20px",
               }}
             >
-              <h1
+              <div
                 style={{
-                  fontSize: "72px",
-                  fontWeight: 300,
+                  display: "flex",
+                  fontSize: "64px",
+                  fontWeight: 600,
                   color: "#FFFFFF",
                   letterSpacing: "-0.02em",
                   lineHeight: 1.1,
                   maxWidth: "1000px",
+                  textAlign: "center",
                 }}
               >
                 {title}
-              </h1>
+              </div>
               {description && (
-                <p
+                <div
                   style={{
-                    fontSize: "28px",
+                    display: "flex",
+                    fontSize: "24px",
                     color: "rgba(255,255,255,0.6)",
-                    fontWeight: 300,
+                    fontWeight: 400,
                     letterSpacing: "0.01em",
                     lineHeight: 1.4,
-                    maxWidth: "900px",
+                    maxWidth: "800px",
+                    textAlign: "center",
                   }}
                 >
                   {description}
-                </p>
+                </div>
               )}
+            </div>
+
+            {/* Domain badge */}
+            <div
+              style={{
+                display: "flex",
+                marginTop: "16px",
+                padding: "8px 20px",
+                border: "1px solid rgba(255,255,255,0.2)",
+                borderRadius: "4px",
+                fontSize: "16px",
+                color: "rgba(255,255,255,0.7)",
+                letterSpacing: "0.05em",
+              }}
+            >
+              hackathon.lat
             </div>
           </div>
         </div>
@@ -169,6 +167,10 @@ export async function GET(request: NextRequest) {
       {
         width: 1200,
         height: 630,
+        headers: {
+          "Cache-Control": "public, max-age=86400, s-maxage=86400, stale-while-revalidate=604800",
+          "Content-Type": "image/png",
+        },
       }
     );
   } catch (e: unknown) {
